@@ -1,0 +1,8 @@
+lib/cobbler/pack.rb
+lib/cobbler.rb
+test/test_cobbler.rb
+Rakefile
+Manifest.txt
+README.txt
+History.txt
+.gemspec
