@@ -12,52 +12,6 @@ class Shoes
       $stderr.puts *args
     end
 
-    def self.pack opts={}
-      debug "pack called with opts: #{opts.inspect}"
-
-      path = opts[:path]
-
-      shy_path = if File.directory? path
-        path.gsub(%r![\\/]+$!, '') + ".shy"
-      else
-        path.gsub(/\.\w+$/, '') + ".shy"
-      end
-
-      debug "shy_path: #{shy_path}"
-
-      shy_meta = Shy.new
-      shy_meta.name     = opts[:name]     || "shoes_app"
-      shy_meta.creator  = opts[:creator]  || "Anonymous Coward"
-      shy_meta.version  = opts[:version]  || "0.0.0"
-      shy_meta.launch   = opts[:launch]   || path
-
-      debug "shy_meta: #{shy_meta.inspect}"
-
-      blk           = opts[:progress]   || proc {|*frac| } # noop
-      platforms     = opts[:platforms]  || [ :shy, :exe, :run, :dmg ]
-      include_shoes = opts[:include_shoes]
-
-      Shy.c(shy_path, shy_meta, path, &blk)
-
-      platforms.each do |platform|
-        case platform
-          when :exe
-            debug "Working on an .exe for Windows."
-            Shoes::Pack.exe( shy_path, include_shoes, &blk )
-          when :dmg
-            debug "Working on a .dmg for Mac OS X."
-            Shoes::Pack.dmg( shy_path, include_shoes, &blk )
-          when :run
-            debug "Working on a .run for Linux."
-            Shoes::Pack.linux( shy_path, include_shoes, &blk )
-        end
-      end
-
-      unless platforms.include? :shy
-        FileUtils.rm_rf( shy_path )
-      end
-    end
-
     def self.rewrite a, before, hsh
       File.open(before) do |b|
         b.each do |line|
@@ -67,7 +21,7 @@ class Shoes
     end
 
     def self.pkg(platform, opt)
-      url = case        
+      url = case opt        
         when :yes, true then
           "http://shoes.heroku.com/pkg/raisins/#{platform}/shoes"
         when :novideo then

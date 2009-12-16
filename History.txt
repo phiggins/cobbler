@@ -1,6 +1,9 @@
+=== 1.1.0 / 2009-12-16
+* 1 minor enhancement
+  * Moved custom code from pack.rb to cobbler.rb.
+* 1 bug fix
+  * Fixed broken case statement that ignored the :include_shoes setting.
+
 === 1.0.0 / 2009-11-11
-
 * 1 major enhancement
-
   * Birthday!
-
