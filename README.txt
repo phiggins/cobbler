@@ -1,6 +1,6 @@
 = cobbler
 
-* http://github.com/phiggy/cobbler 
+* http://github.com/phiggins/cobbler 
 
 == DESCRIPTION:
 
@@ -17,12 +17,12 @@ instead of GUI based.
 
   require 'cobbler'
 
-  Shoes::Pack.pack( :name       => "Sample Shoes App",
-                    :creator    => "Anonymous",
-                    :version    => "1.2.3",
-                    :launch     => "lib/sample.rb",
-                    :path       => "sample_app",
-                    :platforms  => [ :exe, :dmg ] )
+  Cobbler.pack( :name       => "Sample Shoes App",
+                :creator    => "Anonymous",
+                :version    => "1.2.3",
+                :launch     => "lib/sample.rb",
+                :path       => "sample_app",
+                :platforms  => [ :exe, :dmg ] )
 
 == REQUIREMENTS:
 
